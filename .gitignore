@@ -1,2 +1,3 @@
 \.venv
 data
+notebooks\.ipynb_checkpoints
