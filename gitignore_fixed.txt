@@ -6,4 +6,6 @@ __pycache__/
 *.pyc
 dataset/
 artifacts/
+artifacts2/
 output/
+output2/
