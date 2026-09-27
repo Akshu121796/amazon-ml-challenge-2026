@@ -123,7 +123,7 @@ def test_label_pairs_marks_ground_truth(sources):
 
 
 def test_f05_matches_reference_evaluator():
-    sys.path.insert(0, str(REPO_ROOT))
+    sys.path.insert(0, str(PACKAGE_ROOT / "src" / "validation_artifacts"))
     import evaluator as reference
 
     cases = [

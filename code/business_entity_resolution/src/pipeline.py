@@ -240,6 +240,14 @@ def command_evaluate(args: argparse.Namespace) -> None:
     val_ids = sample_ids(val_ids, args.eval_sample, args.seed)
  
     eval_s1, targets = load_sources(train_dir, "train", s1_ids=set(val_ids))
+    if len(eval_s1) == 0:
+        raise ValueError(
+            f"0 of {len(val_ids):,} val-ids were found in {train_dir}/train_source1.tsv. "
+            "This usually means --val-ids points at a file whose IDs belong to a different "
+            "dataset than --train-dir (e.g. the provided validation_artifacts IDs used "
+            "against a synthetic/smoke dataset). Generate matching val-ids for this "
+            "dataset instead of reusing another one's."
+        )
     truth = read_ground_truth(train_dir / "train_ground_truth.tsv", keep_ids=set(val_ids))
     candidates, scored = score_candidates(eval_s1, targets, booster, config)
     eval_truth = {i: truth.get(i, set()) for i in val_ids}
